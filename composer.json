@@ -1,0 +1,23 @@
+{
+    "name": "faboslav/yii2-progressive-media",
+    "description": "Yii2 Progressive Media is a extension for Yii2 which allows to lazyload images and iframes",
+    "keywords": ["yii2", "extension", "progressive", "media", "lazy", "load", "image", "iframe", "faboslav"],
+    "homepage": "https://alesfabianek.cz",
+    "type": "yii2-extension",
+    "support": {
+        "issues": "https://github.com/Faboslav/yii2-progressive-media/issues",
+        "source": "https://github.com/Faboslav/yii2-progressive-media"
+    },
+    "authors": [
+        {
+            "name": "Aleš Fabiánek",
+            "email": "fabianek.ales@gmail.com",
+            "homepage": "https://www.alesfabianek.cz"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "faboslav\\progressivemedia\\": ""
+        }
+    }
+}
