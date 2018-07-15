@@ -11,7 +11,7 @@ php composer.phar require faboslav/yii2-progressive-media "*"
 or add
 
 ```
-"dactylcore/yii2-progressive-media ": "*"
+"faboslav/yii2-progressive-media ": "*"
 ```
 
 to the `require` section of `composer.json` file.
