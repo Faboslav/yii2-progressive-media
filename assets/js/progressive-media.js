@@ -4,14 +4,14 @@ window.addEventListener('scroll', throttle(loadProgressiveMedia, 250));
 window.addEventListener("resize", debounce(loadProgressiveMedia, 500));
 
 function isInViewport(element) {
-    const offset = (window.innerHeight)
+    const offset = window.innerHeight/2
 
-    var elemTop = element.offsetTop - offset;
-    var elemBottom = elemTop + element.clientHeight + offset;
+    var elementTop = element.offsetTop - offset;
+    var elementBottom = elementTop + element.clientHeight + offset;
     var viewportTop = window.scrollY;
     var viewportBottom = viewportTop + window.innerHeight;
 
-    return elemBottom > viewportTop && elemTop < viewportBottom;
+    return elementBottom > viewportTop && elementTop < viewportBottom;
 }
 
 function throttle(fn, wait) {
@@ -46,19 +46,20 @@ function debounce(func, wait, immediate) {
 function loadProgressiveMedia() {
     $('.progressive-media:not(.progressive-media-loaded):not(.progressive-media-loading)').each(function( index ) {
         if (isInViewport($(this)[0])) {
-            var progressiveMediaImage = $(this);
-            progressiveMediaImage.addClass('progressive-media-loading');
+            var progressiveMedia = $(this);
+            progressiveMedia.removeClass('progressive-media-unloaded');
+            progressiveMedia.addClass('progressive-media-loading');
 
             if ($(this).hasClass('progressive-media-image')) {
-                var progressiveMediaImageAspectRatioInner = $('.aspect .aspect-inner', progressiveMediaImage);
+                var progressiveMediaImageAspectRatioInner = $('.aspect .aspect-inner', progressiveMedia);
 
                 var image = new Image();
                 image.src = $(this).data('image-src');
                 image.className = 'progressive-media-image-original';
                 image.onload = function () {
                     $(progressiveMediaImageAspectRatioInner).append(image);
-                    progressiveMediaImage.removeClass('progressive-media-loading');
-                    progressiveMediaImage.addClass('progressive-media-loaded');
+                    progressiveMedia.removeClass('progressive-media-loading');
+                    progressiveMedia.addClass('progressive-media-loaded');
                 };
             } else if ($(this).hasClass('progressive-media-iframe')) {
                 this.querySelector('.aspect-inner').insertAdjacentHTML('beforeend', this.querySelector('noscript').innerText.trim());
