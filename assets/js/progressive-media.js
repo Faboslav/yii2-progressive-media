@@ -5,21 +5,13 @@ window.addEventListener("resize", debounce(loadProgressiveMedia, 500));
 
 function isInViewport(element) {
     const offset = (window.innerHeight)
-    const scroll = window.scrollY || window.pageYOffset
-    const boundsTop = element.getBoundingClientRect().top + scroll
 
-    const viewport = {
-        top: scroll,
-        bottom: scroll + window.innerHeight,
-    };
+    var elemTop = element.offsetTop - offset;
+    var elemBottom = elemTop + element.clientHeight + offset;
+    var viewportTop = window.scrollY;
+    var viewportBottom = viewportTop + window.innerHeight;
 
-    const bounds = {
-        top: boundsTop - offset,
-        bottom: boundsTop + element.clientHeight + offset,
-    };
-
-    return ( bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom )
-        || ( bounds.top <= viewport.bottom && bounds.top >= viewport.top );
+    return elemBottom > viewportTop && elemTop < viewportBottom;
 }
 
 function throttle(fn, wait) {
@@ -69,10 +61,7 @@ function loadProgressiveMedia() {
                     progressiveMediaImage.addClass('progressive-media-loaded');
                 };
             } else if ($(this).hasClass('progressive-media-iframe')) {
-                var iframe = document.createElement('div');
-                iframe.innerHTML = this.querySelector('noscript').innerHTML.trim();
-
-                this.querySelector('.aspect-inner').appendChild(iframe.firstChild);
+                this.querySelector('.aspect-inner').insertAdjacentHTML('beforeend', this.querySelector('noscript').innerText.trim());
                 this.classList.remove('progressive-media-loading');
                 this.classList.add('progressive-media-loaded');
             }
