@@ -54,8 +54,8 @@ function loadProgressiveMedia() {
                 var progressiveMediaImageAspectRatioInner = $('.aspect .aspect-inner', progressiveMedia);
 
                 var image = new Image();
-                image.src = $(this).data('image-src');
-                image.className = 'progressive-media-image-original';
+                image.src = $(this).data('img-src');
+                image.className = 'progressive-media-image-original progressive-media-content';
                 image.onload = function () {
                     $(progressiveMediaImageAspectRatioInner).append(image);
                     progressiveMedia.removeClass('progressive-media-loading');

@@ -28,18 +28,9 @@
         }
     }
 
-    .progressive-media-image-placeholder, .progressive-media-image-original {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
     .progressive-media-image-placeholder {
         z-index: 2;
-        transition: all .4s linear;
-        //transition: visibility 0s linear 0s, opacity .4s 0s;
+        transition: visibility 400ms linear, opacity 400ms;
     }
 
     .progressive-media-image-original {

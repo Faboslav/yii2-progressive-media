@@ -15,14 +15,14 @@ class ProgressiveMediaHelper
         $imgPlaceholder = Html::tag('img', '', [
             'src' => $placeholderImgSrc,
             'crossorigin' => 'anonymous',
-            'class' => 'progressive-media-content progressive-media-blur'
+            'class' => 'progressive-media-image-placeholder progressive-media-content progressive-media-blur'
         ]);
 
         // Create image
         $img = Html::tag('img', '', merge(['src' => $src], $options));
 
         // Create noScript fallback
-        $noScript = Html::tag('noscript', $img);
+        $noScript = Html::tag('noscript', $imgSrc);
         $noScript = '';
 
         $aspectInner = Html::tag('div', $imgPlaceholder . $noScript, [
@@ -38,7 +38,7 @@ class ProgressiveMediaHelper
             'class' => 'progressive-media progressive-media-image progressive-media-unloaded',
             'style' => 'max-width:' . $width . 'px; max-height:' . $height . 'px;',
             'data' => [
-                'src' => $src,
+                'img-src' => $imgSrc,
             ]
         ]);
     }
