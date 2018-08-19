@@ -4,7 +4,7 @@ window.addEventListener('scroll', throttle(loadProgressiveMedia, 250));
 window.addEventListener("resize", debounce(loadProgressiveMedia, 500));
 
 function isInViewport(element) {
-    const offset = window.innerHeight/2
+    var offset = window.innerHeight/2
 
     var elementTop = element.offsetTop - offset;
     var elementBottom = elementTop + element.clientHeight + offset;
