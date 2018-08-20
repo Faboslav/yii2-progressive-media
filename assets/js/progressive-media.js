@@ -1,4 +1,3 @@
-loadProgressiveMedia();
 window.addEventListener('DOMContentLoaded', loadProgressiveMedia());
 window.addEventListener('scroll', throttle(loadProgressiveMedia, 250));
 window.addEventListener("resize", debounce(loadProgressiveMedia, 500));
@@ -6,12 +5,14 @@ window.addEventListener("resize", debounce(loadProgressiveMedia, 500));
 function isInViewport(element) {
     var offset = window.innerHeight/2
 
-    var elementTop = element.offsetTop - offset;
-    var elementBottom = elementTop + element.clientHeight + offset;
-    var viewportTop = window.scrollY;
-    var viewportBottom = viewportTop + window.innerHeight;
+    var scrollTop = (window.pageYOffset || document.documentElement.scrollTop) - offset;
+    var scrollBottom = scrollTop + window.innerHeight + offset;
 
-    return elementBottom > viewportTop && elementTop < viewportBottom;
+    var rect = element.getBoundingClientRect();
+    var elementTop = rect.top + scrollTop;
+    var elementBottom = elementTop + element.clientHeight;
+
+    return (elementTop > scrollTop && elementTop < scrollBottom) || (elementBottom > scrollTop && elementBottom < scrollBottom);
 }
 
 function throttle(fn, wait) {
