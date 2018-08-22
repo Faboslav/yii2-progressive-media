@@ -1,6 +1,18 @@
+// Test via a getter in the options object to see if the passive property is accessed
+var supportsPassive = false;
+try {
+    var opts = Object.defineProperty({}, 'passive', {
+        get: function() {
+            supportsPassive = true;
+        }
+    });
+    window.addEventListener("testPassive", null, opts);
+    window.removeEventListener("testPassive", null, opts);
+} catch (e) {}
+
 window.addEventListener('DOMContentLoaded', loadProgressiveMedia());
-window.addEventListener('scroll', throttle(loadProgressiveMedia, 250));
-window.addEventListener("resize", debounce(loadProgressiveMedia, 500));
+window.addEventListener('scroll', throttle(loadProgressiveMedia, 250), supportsPassive ? {capture: true, passive: true} : false);
+window.addEventListener("resize", debounce(loadProgressiveMedia, 500), supportsPassive ? {capture: true, passive: true} : false);
 
 function isInViewport(element) {
     var offset = window.innerHeight/2
