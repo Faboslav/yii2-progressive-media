@@ -34,9 +34,19 @@ class ProgressiveMediaHelper
             'style' => 'padding-bottom: ' . $aspectRatio . '%;',
         ]);
 
+        $style = Html::cssStyleToArray($options['style']);
+
+        if(!isset($style['max-width'])) {
+            $style['max-width'] = $width . 'px';
+        }
+
+        if (!isset($style['max-height'])) {
+            $style['max-height'] = $height . 'px';
+        }
+
         return Html::tag('div', $aspect, [
             'class' => 'progressive-media progressive-media-image progressive-media-unloaded',
-            'style' => 'max-width:' . $width . 'px; max-height:' . $height . 'px;',
+            'style' => Html::cssStyleFromArray($style),
             'data' => [
                 'img-src' => $imgSrc,
             ]
