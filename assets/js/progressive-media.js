@@ -1,21 +1,5 @@
-// Test via a getter in the options object to see if the passive property is accessed
-var supportsPassive = false;
-try {
-    var opts = Object.defineProperty({}, 'passive', {
-        get: function() {
-            supportsPassive = true;
-        }
-    });
-    window.addEventListener("testPassive", null, opts);
-    window.removeEventListener("testPassive", null, opts);
-} catch (e) {}
-
-window.addEventListener('DOMContentLoaded', loadProgressiveMedia());
-window.addEventListener('scroll', throttle(loadProgressiveMedia, 250), supportsPassive ? {capture: true, passive: true} : false);
-window.addEventListener("resize", debounce(loadProgressiveMedia, 500), supportsPassive ? {capture: true, passive: true} : false);
-
 function isInViewport(element) {
-    var offset = window.innerHeight/2
+    var offset = window.innerHeight / 2
 
     var scrollTop = (window.pageYOffset || document.documentElement.scrollTop) - offset;
     var scrollBottom = scrollTop + window.innerHeight + offset;
@@ -29,7 +13,7 @@ function isInViewport(element) {
 
 function throttle(fn, wait) {
     var time = Date.now();
-    return function() {
+    return function () {
         if ((time + wait - Date.now()) < 0) {
             fn();
             time = Date.now();
@@ -43,9 +27,9 @@ function throttle(fn, wait) {
 // leading edge, instead of the trailing.
 function debounce(func, wait, immediate) {
     var timeout;
-    return function() {
+    return function () {
         var context = this, args = arguments;
-        var later = function() {
+        var later = function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -57,14 +41,14 @@ function debounce(func, wait, immediate) {
 };
 
 function loadProgressiveMedia() {
-    $('.progressive-media:not(.progressive-media-loaded):not(.progressive-media-loading)').each(function( index ) {
+    $('.progressive-media:not(.progressive-media-loaded):not(.progressive-media-loading)').each(function (index) {
         if (isInViewport($(this)[0])) {
             var progressiveMedia = $(this);
             progressiveMedia.removeClass('progressive-media-unloaded');
             progressiveMedia.addClass('progressive-media-loading');
 
             if ($(this).hasClass('progressive-media-image')) {
-                var progressiveMediaImageAspectRatioInner = $('.aspect .aspect-inner', progressiveMedia);
+                var progressiveMediaImageAspectRatioInner = $('.progressive-media-aspect .progressive-media-aspect-inner', progressiveMedia);
 
                 var image = new Image();
                 image.src = $(this).data('img-src');
@@ -75,10 +59,27 @@ function loadProgressiveMedia() {
                     progressiveMedia.addClass('progressive-media-loaded');
                 };
             } else if ($(this).hasClass('progressive-media-iframe')) {
-                this.querySelector('.aspect-inner').insertAdjacentHTML('beforeend', this.querySelector('noscript').innerText.trim());
+                this.querySelector('.progressive-media-aspect-inner').insertAdjacentHTML('beforeend', this.querySelector('noscript').innerText.trim());
                 this.classList.remove('progressive-media-loading');
                 this.classList.add('progressive-media-loaded');
             }
         }
     });
 }
+
+// Test via a getter in the options object to see if the passive property is accessed
+var supportsPassive = false;
+try {
+    var opts = Object.defineProperty({}, 'passive', {
+        get: function () {
+            supportsPassive = true;
+        }
+    });
+    window.addEventListener("testPassive", null, opts);
+    window.removeEventListener("testPassive", null, opts);
+} catch (e) {
+}
+
+window.addEventListener('DOMContentLoaded', loadProgressiveMedia());
+window.addEventListener('scroll', throttle(loadProgressiveMedia, 250), supportsPassive ? {capture: true, passive: true} : false);
+window.addEventListener("resize", debounce(loadProgressiveMedia, 500), supportsPassive ? {capture: true, passive: true} : false);

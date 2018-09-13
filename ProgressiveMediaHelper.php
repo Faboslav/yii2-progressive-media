@@ -18,6 +18,13 @@ class ProgressiveMediaHelper
             'class' => 'progressive-media-image-placeholder progressive-media-content progressive-media-blur'
         ]);
 
+        // Create img placeholder
+        $imgPlaceholderEdges = Html::tag('img', '', [
+            'src' => $placeholderImgSrc,
+            'crossorigin' => 'anonymous',
+            'class' => 'progressive-media-image-placeholder progressive-media-image-placeholder-edge progressive-media-content'
+        ]);
+
         // Create image
         $img = Html::tag('img', '', merge(['src' => $src], $options));
 
@@ -25,12 +32,12 @@ class ProgressiveMediaHelper
         $noScript = Html::tag('noscript', $imgSrc);
         $noScript = '';
 
-        $aspectInner = Html::tag('div', $imgPlaceholder . $noScript, [
-            'class' => 'aspect-inner'
+        $aspectInner = Html::tag('div', $imgPlaceholder . $imgPlaceholderEdges . $noScript, [
+            'class' => 'progressive-media-aspect-inner'
         ]);
 
         $aspect = Html::tag('div', $aspectInner, [
-            'class' => 'aspect',
+            'class' => 'progressive-media-aspect',
             'style' => 'padding-bottom: ' . $aspectRatio . '%;',
         ]);
 
@@ -73,11 +80,11 @@ class ProgressiveMediaHelper
         $noScript = Html::tag('noscript', $iframe);
 
         $aspectInner = Html::tag('div', $noScript, [
-            'class' => 'aspect-inner'
+            'class' => 'progressive-media-aspect-inner'
         ]);
 
         $aspect = Html::tag('div', $aspectInner, [
-            'class' => 'aspect',
+            'class' => 'progressive-media-aspect',
             'style' => 'padding-bottom: ' . $aspectRatio . '%;',
         ]);
 

@@ -13,6 +13,6 @@ class ProgressiveMediaAssetBundle extends AssetBundle
     ];
 
     public $css = [
-        'css/progressive-media.css'
+        'css/progressive-media.min.css'
     ];
 }

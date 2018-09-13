@@ -16,4 +16,14 @@ or add
 
 to the `require` section of `composer.json` file.
 
-## Configuration
+## Usage
+Register asset bundle 
+```php
+\faboslav\progressivemedia\ProgressiveMediaAssetBundle::register(\Yii::$app->view);
+```
+
+#### Rendering images
+```php
+echo \faboslav\progressivemedia\ProgressiveMediaHelper::img($imageUrl, $placeholderImgUrl, $width, $height) ?>
+```
+
