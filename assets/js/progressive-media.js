@@ -80,6 +80,7 @@ try {
 } catch (e) {
 }
 
+loadProgressiveMedia();
 window.addEventListener('DOMContentLoaded', loadProgressiveMedia());
 window.addEventListener('scroll', throttle(loadProgressiveMedia, 250), supportsPassive ? {capture: true, passive: true} : false);
 window.addEventListener("resize", debounce(loadProgressiveMedia, 500), supportsPassive ? {capture: true, passive: true} : false);
