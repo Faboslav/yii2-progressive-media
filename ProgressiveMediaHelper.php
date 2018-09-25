@@ -5,8 +5,17 @@ namespace faboslav\progressivemedia;
 use Yii;
 use yii\helpers\Html;
 
+
 class ProgressiveMediaHelper
 {
+    /**
+     * @param string $imgSrc
+     * @param string $placeholderImgSrc
+     * @param int $width
+     * @param int $height
+     * @param array $options
+     * @return string
+     */
     public static function img(string $imgSrc, string $placeholderImgSrc, int $width, int $height, array $options = []) : string
     {
         $aspectRatio = ($height / $width) * 100;
