@@ -74,5 +74,4 @@ echo \faboslav\progressivemedia\ProgressiveMediaHelper::iframe($iframeSrc, $widt
 ```
 
 ## License
-
 MIT
