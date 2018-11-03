@@ -41,30 +41,34 @@ function debounce(func, wait, immediate) {
 };
 
 function loadProgressiveMedia() {
-    $('.progressive-media:not(.progressive-media-loaded):not(.progressive-media-loading)').each(function (index) {
-        if (isInViewport($(this)[0])) {
-            var progressiveMedia = $(this);
-            progressiveMedia.removeClass('progressive-media-unloaded');
-            progressiveMedia.addClass('progressive-media-loading');
+    var progressiveMediaElements = document.querySelectorAll('.progressive-media:not(.progressive-media-loaded):not(.progressive-media-loading)');
+    var i;
 
-            if ($(this).hasClass('progressive-media-image')) {
-                var progressiveMediaImageAspectRatioInner = $('.progressive-media-aspect .progressive-media-aspect-inner', progressiveMedia);
-
-                var image = new Image();
-                image.src = $(this).data('img-src');
-                image.className = 'progressive-media-image-original progressive-media-content';
-                image.onload = function () {
-                    $(progressiveMediaImageAspectRatioInner).append(image);
-                    progressiveMedia.removeClass('progressive-media-loading');
-                    progressiveMedia.addClass('progressive-media-loaded');
-                };
-            } else if ($(this).hasClass('progressive-media-iframe')) {
-                this.querySelector('.progressive-media-aspect-inner').insertAdjacentHTML('beforeend', this.querySelector('noscript').innerText.trim());
-                this.classList.remove('progressive-media-loading');
-                this.classList.add('progressive-media-loaded');
-            }
+    for (i = 0; i < progressiveMediaElements.length; ++i) {
+        if (isInViewport(progressiveMediaElements[i])) {
+            loadProgressiveMedium(progressiveMediaElements[i]);
         }
-    });
+    }
+}
+
+function loadProgressiveMedium(progressiveMedium) {
+    progressiveMedium.classList.remove('progressive-media-unloaded');
+    progressiveMedium.classList.add('progressive-media-loading');
+
+    if (progressiveMedium.classList.contains('progressive-media-image')) {
+        var image = new Image();
+        image.src = progressiveMedium.getAttribute('data-img-src');
+        image.className = 'progressive-media-image-original progressive-media-content';
+        image.onload = function () {
+            progressiveMedium.querySelector('.progressive-media-aspect-inner').insertAdjacentElement('beforeend', image);
+            progressiveMedium.classList.remove('progressive-media-loading');
+            progressiveMedium.classList.add('progressive-media-loaded');
+        };
+    } else if (progressiveMedium.classList.contains('progressive-media-iframe')) {
+        progressiveMedium.querySelector('.progressive-media-aspect-inner').insertAdjacentHTML('beforeend', progressiveMedium.querySelector('noscript').innerText.trim());
+        progressiveMedium.classList.remove('progressive-media-loading');
+        progressiveMedium.classList.add('progressive-media-loaded');
+    }
 }
 
 // Test via a getter in the options object to see if the passive property is accessed

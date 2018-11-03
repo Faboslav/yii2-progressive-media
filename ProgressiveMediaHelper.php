@@ -7,6 +7,14 @@ use yii\helpers\Html;
 
 class ProgressiveMediaHelper
 {
+    /**
+     * @param string $imgSrc
+     * @param string $placeholderImgSrc
+     * @param int $width
+     * @param int $height
+     * @param array $options
+     * @return string
+     */
     public static function img(string $imgSrc, string $placeholderImgSrc, int $width, int $height, array $options = []) : string
     {
         $aspectRatio = ($height / $width) * 100;
@@ -26,11 +34,10 @@ class ProgressiveMediaHelper
         ]);
 
         // Create image
-        $img = Html::tag('img', '', merge(['src' => $src], $options));
+        $noScriptImg = Html::tag('img', '', merge(['src' => $imgSrc], $options));
 
         // Create noScript fallback
-        $noScript = Html::tag('noscript', $imgSrc);
-        $noScript = '';
+        $noScript = Html::tag('noscript', $noScriptImg);
 
         $aspectInner = Html::tag('div', $imgPlaceholder . $imgPlaceholderEdges . $noScript, [
             'class' => 'progressive-media-aspect-inner'

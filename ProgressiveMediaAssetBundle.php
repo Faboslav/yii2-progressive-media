@@ -9,7 +9,7 @@ class ProgressiveMediaAssetBundle extends AssetBundle
     public $sourcePath = '@vendor/faboslav/yii2-progressive-media/assets';
 
     public $js = [
-        'js/progressive-media.js',
+        'js/progressive-media.min.js',
     ];
 
     public $css = [
