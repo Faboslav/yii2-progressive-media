@@ -5,13 +5,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require faboslav/yii2-progressive-media "*"
+php composer.phar require faboslav/yii2-progressive-media "1.0.0"
 ```
 
 or add
 
 ```
-"faboslav/yii2-progressive-media ": "*"
+"faboslav/yii2-progressive-media ": "1.0.0"
 ```
 
 to the `require` section of `composer.json` file.
