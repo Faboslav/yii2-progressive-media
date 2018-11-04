@@ -1,11 +1,22 @@
-# Yii2 Progressive Media
+ProgressiveMedia is a fast, optimalized and lightweight library written in plain vanilla javascript. 
+
+It's focus is on eliminating unnecessary loading of non visible images and iframes and thus speeding up the web application.
+Only images and iframes which are visible in the viewport and it's configured offset are smoothly loaded, loading is also considered in the resize event.
+
+Progressive media is always auto initialized.
+You can [configure](#-configurables) ProgressiveMedia by setting up the `progressiveMediaOptions` variable
+
+Loading process of images is heavely inspired by the [Medium](https://medium.com/) website. Here is a preview:
+
+![Yii2 Progressive Media Preview](https://i.imgur.com/rg3fBtT.gif)
+
 ## Installation
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
 Either run
 
 ```
-php composer.phar require faboslav/yii2-progressive-media "1.0.0"
+php composer require faboslav/yii2-progressive-media "1.0.0"
 ```
 
 or add
@@ -16,46 +27,38 @@ or add
 
 to the `require` section of `composer.json` file.
 
-## Preview
-![Yii2 Progressive Media Preview](https://i.imgur.com/rg3fBtT.gif)
-
-This package is primary an attempt to copy lazy loading effect from the Medium website.
-
-Only images and iframes rendered by instructions writed below and visible in the area of viewport of the user are loaded.
-Actually there is an half of the viewport offset to top and bottom in addition to the original viewport area in which are the progressive media loading.
-
-For both images and iframes there is no script fallback for cases when javascript is disabled.
-
-##### Images
-Blurred placeholder image with resolution of maximum 44x44px is visible until the image with full resolution is loaded and then faded into page.
-
-##### Iframes
-Background styled by CSS is visible until iframe is loaded.
-
 ## Usage
 Register asset bundle
 ```php
 \faboslav\progressivemedia\ProgressiveMediaAssetBundle::register(\Yii::$app->view);
 ```
 
-##### Rendering images using Progressive Media Helper
+### Rendering images
+Recommended resolution for image placeholders is maximum of 44x44px.
+
+##### Rendering using ProgressiveMediaHelper
 ```php
 echo \faboslav\progressivemedia\ProgressiveMediaHelper::img($imageUrl, $placeholderImgUrl, $width, $height, $options);
 ```
 
-##### Rendering images manually
+##### Rendering manually
 ```html
 <div class="progressive-media progressive-media-image progressive-media-unloaded" style="max-width: {WIDTH}px; max-height: {HEIGHT}px;" data-img-src="{IMG_URL}">
     <div class="progressive-media-aspect" style="padding-bottom: {WIDTH_x_HEIGHT_ASPECT_RATIO}%;">
         <div class="progressive-media-aspect-inner">
             <img class="progressive-media-image-placeholder progressive-media-content progressive-media-blur" src="{PLACEHOLDER_IMG_URL}">
             <img class="progressive-media-image-placeholder progressive-media-image-placeholder-edge progressive-media-content" src="{PLACEHOLDER_IMG_URL}">
+            <noscript>
+                <img src="{IMG_URL}" class="progressive-media-image-original progressive-media-content">
+            </noscript>
         </div>
     </div>
 </div>
 ```
 
-##### Rendering images using Progressive Media Helper
+### Rendering iframes
+
+##### Using ProgressiveMediaHelper
 ```php
 echo \faboslav\progressivemedia\ProgressiveMediaHelper::iframe($iframeSrc, $width, $height, $options);
 ```
@@ -66,7 +69,7 @@ echo \faboslav\progressivemedia\ProgressiveMediaHelper::iframe($iframeSrc, $widt
     <div class="progressive-media-aspect" style="padding-bottom: {WIDTH_x_HEIGHT_ASPECT_RATIO}%;">
         <div class="progressive-media-aspect-inner">
             <noscript>
-                <iframe class="progressive-media-content" src="{IFRAME_URL}"></iframe>
+                <iframe src="{IFRAME_URL}" class="progressive-media-content"></iframe>
             </noscript>
          </div>
     </div>
