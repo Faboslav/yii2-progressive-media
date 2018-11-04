@@ -4,7 +4,7 @@ It's focus is on eliminating unnecessary loading of non visible images and ifram
 Only images and iframes which are visible in the viewport and it's configured offset are smoothly loaded, loading is also considered in the resize event.
 
 Progressive media is always auto initialized.
-You can [configure](#-configurables) ProgressiveMedia by setting up the `progressiveMediaOptions` variable
+You can [https://github.com/Faboslav/progressive-media#configurables](#configurables) ProgressiveMedia by setting up the `progressiveMediaOptions` variable
 
 Loading process of images is heavely inspired by the [Medium](https://medium.com/) website. Here is a preview:
 
@@ -36,12 +36,12 @@ Register asset bundle
 ### Rendering images
 Recommended resolution for image placeholders is maximum of 44x44px.
 
-##### Rendering using ProgressiveMediaHelper
+#### Rendering using ProgressiveMediaHelper
 ```php
 echo \faboslav\progressivemedia\ProgressiveMediaHelper::img($imageUrl, $placeholderImgUrl, $width, $height, $options);
 ```
 
-##### Rendering manually
+#### Rendering manually
 ```html
 <div class="progressive-media progressive-media-image progressive-media-unloaded" style="max-width: {WIDTH}px; max-height: {HEIGHT}px;" data-img-src="{IMG_URL}">
     <div class="progressive-media-aspect" style="padding-bottom: {WIDTH_x_HEIGHT_ASPECT_RATIO}%;">
@@ -58,12 +58,12 @@ echo \faboslav\progressivemedia\ProgressiveMediaHelper::img($imageUrl, $placehol
 
 ### Rendering iframes
 
-##### Using ProgressiveMediaHelper
+#### Using ProgressiveMediaHelper
 ```php
 echo \faboslav\progressivemedia\ProgressiveMediaHelper::iframe($iframeSrc, $width, $height, $options);
 ```
 
-##### Rendering iframes manually
+#### Rendering iframes manually
 ```html
 <div class="progressive-media progressive-media-iframe progressive-media-unloaded" data-src="{IFRAME_URL}">
     <div class="progressive-media-aspect" style="padding-bottom: {WIDTH_x_HEIGHT_ASPECT_RATIO}%;">
