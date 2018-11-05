@@ -4,6 +4,7 @@ namespace faboslav\progressivemedia;
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 class ProgressiveMediaHelper
 {
@@ -48,7 +49,7 @@ class ProgressiveMediaHelper
             'style' => 'padding-bottom: ' . $aspectRatio . '%;',
         ]);
 
-        $style = Html::cssStyleToArray($options['style']);
+        $style = Html::cssStyleToArray(ArrayHelper::getValue($options, 'style', []));
 
         if(!isset($style['max-width'])) {
             $style['max-width'] = $width . 'px';
