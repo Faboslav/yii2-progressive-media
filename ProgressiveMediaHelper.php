@@ -49,7 +49,7 @@ class ProgressiveMediaHelper
             'style' => 'padding-bottom: ' . $aspectRatio . '%;',
         ]);
 
-        $style = Html::cssStyleToArray(ArrayHelper::getValue($options, 'style', []));
+        $style = Html::cssStyleToArray(ArrayHelper::getValue($options, 'style', ''));
 
         if(!isset($style['max-width'])) {
             $style['max-width'] = $width . 'px';
