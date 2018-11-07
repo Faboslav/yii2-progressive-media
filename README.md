@@ -63,7 +63,7 @@ echo \faboslav\progressivemedia\ProgressiveMediaHelper::img($imageUrl, $placehol
 echo \faboslav\progressivemedia\ProgressiveMediaHelper::iframe($iframeSrc, $width, $height, $options);
 ```
 
-#### Rendering iframes manually
+#### Rendering manually
 ```html
 <div class="progressive-media progressive-media-iframe progressive-media-unloaded" data-src="{IFRAME_URL}">
     <div class="progressive-media-aspect" style="padding-bottom: {WIDTH_x_HEIGHT_ASPECT_RATIO}%;">
