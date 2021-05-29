@@ -35,7 +35,7 @@ class ProgressiveMediaHelper
         ]);
 
         // Create image
-        $noScriptImg = Html::tag('img', '', merge(['src' => $imgSrc, 'class' => 'progressive-media-image-original progressive-media-content'], $options));
+        $noScriptImg = Html::tag('img', '', array_merge(['src' => $imgSrc, 'class' => 'progressive-media-image-original progressive-media-content'], $options));
 
         // Create noScript fallback
         $noScript = Html::tag('noscript', $noScriptImg);
@@ -82,7 +82,7 @@ class ProgressiveMediaHelper
         Html::addCssClass($options, 'progressive-media-content');
 
         // Create Iframe
-        $iframe = Html::tag('iframe', '', merge(['src' => $src, 'class' => 'progressive-media-content'], $options));
+        $iframe = Html::tag('iframe', '', array_merge(['src' => $src, 'class' => 'progressive-media-content'], $options));
 
         // Create noScript fallback
         $noScript = Html::tag('noscript', $iframe);
